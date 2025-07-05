@@ -41,54 +41,27 @@ temp/
 
 ---
 
-# blog-backend - Quarkus (Maven/Gradle)
-blog-backend/target/
-blog-backend/quarkus-app/
-blog-backend/quarkus-run.jar
-blog-backend/quarkus-app.jar
-blog-backend/*.jar
-blog-backend/*.war
-blog-backend/*.ear
-blog-backend/pom.xml.tag
-blog-backend/pom.xml.versionsBackup
-blog-backend/pom.xml.next
-blog-backend/build/ # Para projetos Gradle
-blog-backend/.gradle/ # Para projetos Gradle
-blog-backend/native-image/ # Imagem nativa do GraalVM
+#  - Quarkus (Maven/Gradle)
+target/
+quarkus-app/
+quarkus-run.jar
+quarkus-app.jar
+*.jar
+*.war
+*.ear
+pom.xml.tag
+pom.xml.versionsBackup
+pom.xml.next
+build/ # Para projetos Gradle
+.gradle/ # Para projetos Gradle
+native-image/ # Imagem nativa do GraalVM
 
 # Arquivos específicos do Maven
-blog-backend/.mvn/wrapper/maven-wrapper.jar
+/.mvn/wrapper/maven-wrapper.jar
 
 # Arquivos específicos do Gradle
-blog-backend/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.jar
 
----
 
-# Frontend - Node.js (NPM/Yarn)
-frontend/node_modules/
-frontend/dist/           # Pasta de build da aplicação frontend
-frontend/build/          # Outro nome comum para pasta de build
-frontend/coverage/       # Relatórios de cobertura de teste
-frontend/.parcel-cache/  # Cache do Parcel (se estiver usando)
-
-# Arquivos de pacotes
-frontend/package-lock.json
-frontend/yarn.lock
-
-# Variáveis de ambiente frontend (se houver)
-frontend/.env
-frontend/.env.development.local
-frontend/.env.test.local
-frontend/.env.production.local
-
----
-
-# Docker
-# Ignorar volumes de dados persistentes do Docker Compose
-# Dependendo de como você configura seus volumes no docker-compose.yml
-# Exemplo, se você tem um volume de dados para o Postgres:
-# docker/data/postgresql/ # Se o seu volume estiver mapeado para um diretório local
-
-# Ignorar imagens Docker construídas localmente se não quiser versioná-las
 # *.img
 # *.tar
