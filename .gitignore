@@ -41,26 +41,26 @@ temp/
 
 ---
 
-# - Quarkus (Maven/Gradle)
-target/
-quarkus-app/
-quarkus-run.jar
-quarkus-app.jar
-*.jar
-*.war
-*.ear
-pom.xml.tag
-pom.xml.versionsBackup
-pom.xml.next
-build/ # Para projetos Gradle
-.gradle/ # Para projetos Gradle
-native-image/ # Imagem nativa do GraalVM
+# blog-backend - Quarkus (Maven/Gradle)
+blog-backend/target/
+blog-backend/quarkus-app/
+blog-backend/quarkus-run.jar
+blog-backend/quarkus-app.jar
+blog-backend/*.jar
+blog-backend/*.war
+blog-backend/*.ear
+blog-backend/pom.xml.tag
+blog-backend/pom.xml.versionsBackup
+blog-backend/pom.xml.next
+blog-backend/build/ # Para projetos Gradle
+blog-backend/.gradle/ # Para projetos Gradle
+blog-backend/native-image/ # Imagem nativa do GraalVM
 
 # Arquivos específicos do Maven
-.mvn/wrapper/maven-wrapper.jar
+blog-backend/.mvn/wrapper/maven-wrapper.jar
 
 # Arquivos específicos do Gradle
-gradle/wrapper/gradle-wrapper.jar
+blog-backend/gradle/wrapper/gradle-wrapper.jar
 
 ---
 

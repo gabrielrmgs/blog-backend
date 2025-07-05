@@ -1,6 +1,7 @@
 package com.gabrielsa.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.gabrielsa.enums.StatusArtigo;
 import com.gabrielsa.generics.ModeloGenerico;
@@ -39,26 +40,29 @@ public class Artigo extends ModeloGenerico {
     private LocalDateTime dataPublicacao;
 
     @ManyToMany
-    private Etiqueta etiqueta;
+    private List<Etiqueta> etiquetas;
 
     public Artigo() {
     }
 
-    public Artigo(StatusArtigo status, String titulo, Usuario autor, String conteudo, LocalDateTime dataPublicacao, Etiqueta etiqueta) {
+    public Artigo(StatusArtigo status, String titulo, Usuario autor, String conteudo, LocalDateTime dataPublicacao, List<Etiqueta> etiquetas) {
         this.status = status;
         this.titulo = titulo;
         this.autor = autor;
         this.conteudo = conteudo;
         this.dataPublicacao = dataPublicacao;
-        this.etiqueta = etiqueta;
+        this.etiquetas = etiquetas;
     }
-    public Artigo(StatusArtigo status, String titulo, Usuario autor, String conteudo, Etiqueta etiqueta) {
+
+    public Artigo(StatusArtigo status, String titulo, Usuario autor, String conteudo, List<Etiqueta> etiquetas) {
         this.status = status;
         this.titulo = titulo;
         this.autor = autor;
         this.conteudo = conteudo;
-        this.etiqueta = etiqueta;
+        this.etiquetas = etiquetas;
     }
+
+
 
     public Long getId() {
         return this.id;
@@ -108,12 +112,11 @@ public class Artigo extends ModeloGenerico {
         this.dataPublicacao = dataPublicacao;
     }
 
-    public Etiqueta getEtiqueta() {
-        return this.etiqueta;
+    public List<Etiqueta> getEtiquetas() {
+        return this.etiquetas;
     }
 
-    public void setEtiqueta(Etiqueta etiqueta) {
-        this.etiqueta = etiqueta;
+    public void setEtiquetas(List<Etiqueta> etiquetas) {
+        this.etiquetas = etiquetas;
     }
-
 }
