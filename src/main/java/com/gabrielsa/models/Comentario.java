@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Comentario extends ModeloGenerico{
+public class Comentario extends ModeloGenerico {
 
     @Id
     @SequenceGenerator(name = "comentario_seq_gen", sequenceName = "comentario_seq")

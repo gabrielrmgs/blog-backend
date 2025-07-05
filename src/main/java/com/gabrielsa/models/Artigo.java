@@ -45,7 +45,8 @@ public class Artigo extends ModeloGenerico {
     public Artigo() {
     }
 
-    public Artigo(StatusArtigo status, String titulo, Usuario autor, String conteudo, LocalDateTime dataPublicacao, List<Etiqueta> etiquetas) {
+    public Artigo(StatusArtigo status, String titulo, Usuario autor, String conteudo, LocalDateTime dataPublicacao,
+            List<Etiqueta> etiquetas) {
         this.status = status;
         this.titulo = titulo;
         this.autor = autor;
@@ -61,8 +62,6 @@ public class Artigo extends ModeloGenerico {
         this.conteudo = conteudo;
         this.etiquetas = etiquetas;
     }
-
-
 
     public Long getId() {
         return this.id;

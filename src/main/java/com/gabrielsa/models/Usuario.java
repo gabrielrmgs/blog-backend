@@ -11,8 +11,8 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"nome"}),
-    @UniqueConstraint(columnNames = {"email"})
+        @UniqueConstraint(columnNames = { "nome" }),
+        @UniqueConstraint(columnNames = { "email" })
 })
 public class Usuario extends ModeloGenerico {
 
