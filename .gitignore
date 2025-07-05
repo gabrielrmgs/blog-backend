@@ -1,0 +1,94 @@
+# Ignorar arquivos gerais do sistema operacional
+.DS_Store
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Ignorar arquivos de IDEs
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# VS Code
+.vscode/
+
+# Eclipse
+.project
+.classpath
+.settings/
+.apt_generated/
+.factorypath
+.metadata/
+
+# Arquivos de log e temporários
+*.log
+log/
+tmp/
+temp/
+*.swp
+*.bak
+*.swo
+
+# Arquivos de configurações de ambiente local (importante!)
+.env
+.env.*
+*.properties.local
+*.yaml.local
+
+---
+
+# Backend - Quarkus (Maven/Gradle)
+backend/target/
+backend/quarkus-app/
+backend/quarkus-run.jar
+backend/quarkus-app.jar
+backend/*.jar
+backend/*.war
+backend/*.ear
+backend/pom.xml.tag
+backend/pom.xml.versionsBackup
+backend/pom.xml.next
+backend/build/ # Para projetos Gradle
+backend/.gradle/ # Para projetos Gradle
+backend/native-image/ # Imagem nativa do GraalVM
+
+# Arquivos específicos do Maven
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Arquivos específicos do Gradle
+backend/gradle/wrapper/gradle-wrapper.jar
+
+---
+
+# Frontend - Node.js (NPM/Yarn)
+frontend/node_modules/
+frontend/dist/           # Pasta de build da aplicação frontend
+frontend/build/          # Outro nome comum para pasta de build
+frontend/coverage/       # Relatórios de cobertura de teste
+frontend/.parcel-cache/  # Cache do Parcel (se estiver usando)
+
+# Arquivos de pacotes
+frontend/package-lock.json
+frontend/yarn.lock
+
+# Variáveis de ambiente frontend (se houver)
+frontend/.env
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+---
+
+# Docker
+# Ignorar volumes de dados persistentes do Docker Compose
+# Dependendo de como você configura seus volumes no docker-compose.yml
+# Exemplo, se você tem um volume de dados para o Postgres:
+# docker/data/postgresql/ # Se o seu volume estiver mapeado para um diretório local
+
+# Ignorar imagens Docker construídas localmente se não quiser versioná-las
+# *.img
+# *.tar
