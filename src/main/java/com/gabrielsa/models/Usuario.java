@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import java.util.Objects;
 
 @Entity
 @Table(uniqueConstraints = {
@@ -24,12 +25,20 @@ public class Usuario extends ModeloGenerico {
     private String nome;
     private String email;
     private String senha;
-    private String cargo;
+    private Cargo cargo;
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String email, String senha, String cargo) {
+    public Usuario(Long id, String nome, String email, String senha, Cargo cargo) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cargo = cargo;
+    }
+
+    public Usuario(String nome, String email, String senha, Cargo cargo) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -68,12 +77,64 @@ public class Usuario extends ModeloGenerico {
         this.senha = senha;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return this.cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 
+
+    public Usuario id(Long id) {
+        setId(id);
+        return this;
+    }
+
+    public Usuario nome(String nome) {
+        setNome(nome);
+        return this;
+    }
+
+    public Usuario email(String email) {
+        setEmail(email);
+        return this;
+    }
+
+    public Usuario senha(String senha) {
+        setSenha(senha);
+        return this;
+    }
+
+    public Usuario cargo(Cargo cargo) {
+        setCargo(cargo);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Usuario)) {
+            return false;
+        }
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && Objects.equals(nome, usuario.nome) && Objects.equals(email, usuario.email) && Objects.equals(senha, usuario.senha) && Objects.equals(cargo, usuario.cargo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, email, senha, cargo);
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", senha='" + getSenha() + "'" +
+            ", cargo='" + getCargo() + "'" +
+            "}";
+    }
 }
