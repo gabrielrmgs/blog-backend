@@ -1,13 +1,17 @@
 package com.gabrielsa.models;
 
+import com.gabrielsa.dtos.UsuarioDTO;
+import com.gabrielsa.dtos.UsuarioRespostaDTO;
 import com.gabrielsa.generics.ModeloGenerico;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+
 import java.util.Objects;
 
 @Entity
@@ -25,6 +29,7 @@ public class Usuario extends ModeloGenerico {
     private String nome;
     private String email;
     private String senha;
+    @ManyToOne
     private Cargo cargo;
 
     public Usuario() {
@@ -109,6 +114,18 @@ public class Usuario extends ModeloGenerico {
     public Usuario cargo(Cargo cargo) {
         setCargo(cargo);
         return this;
+    }
+
+    public static Usuario fromDTO(UsuarioDTO dto, String senhaEncriptada, Cargo cargoUsuario) {
+        return new Usuario()
+        .nome(dto.nome())
+        .email(dto.email())
+        .senha(senhaEncriptada)
+        .cargo(cargoUsuario);
+    }
+
+    public UsuarioRespostaDTO toDTO() {
+        return new UsuarioRespostaDTO(this.id,this.nome, this.email, this.cargo.getId());
     }
 
     @Override

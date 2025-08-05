@@ -178,21 +178,6 @@ public class Artigo extends ModeloGenerico {
                 etiquetas);
     }
 
-    public ArtigoRespostaDTO toDTO() {
-        List<String> nomesEtiquetas = etiquetas.stream()
-                .map(Etiqueta::getNome)
-                .toList();
-
-        return new ArtigoRespostaDTO(
-                this.id,
-                this.status,
-                this.titulo,
-                this.conteudo,
-                this.dataPublicacao,
-                this.autor.getNome(),
-                nomesEtiquetas);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)

@@ -2,11 +2,16 @@ package com.gabrielsa.models;
 
 import com.gabrielsa.generics.ModeloGenerico;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import java.util.Objects;
 
+@Entity
+@Table
 public class Cargo extends ModeloGenerico {
 
     @Id
@@ -38,6 +43,33 @@ public class Cargo extends ModeloGenerico {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public Cargo id(Long id) {
+        setId(id);
+        return this;
+    }
+
+    public Cargo nome(String nome) {
+        setNome(nome);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Cargo)) {
+            return false;
+        }
+        Cargo cargo = (Cargo) o;
+        return Objects.equals(id, cargo.id) && Objects.equals(nome, cargo.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome);
+    }
+    
 
     @Override
     public String toString() {
