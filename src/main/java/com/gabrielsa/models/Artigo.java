@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.gabrielsa.dtos.ArtigoDTO;
-import com.gabrielsa.dtos.ArtigoRespostaDTO;
 import com.gabrielsa.enums.StatusArtigo;
 import com.gabrielsa.generics.ModeloGenerico;
 import jakarta.persistence.Column;

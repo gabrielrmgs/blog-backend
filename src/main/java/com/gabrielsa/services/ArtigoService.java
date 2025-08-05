@@ -2,7 +2,6 @@ package com.gabrielsa.services;
 
 import java.util.List;
 
-import com.arjuna.ats.arjuna.logging.arjunaI18NLogger;
 import com.gabrielsa.dtos.ArtigoDTO;
 import com.gabrielsa.models.Artigo;
 import com.gabrielsa.models.Etiqueta;
