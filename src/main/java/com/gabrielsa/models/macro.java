@@ -1,6 +1,7 @@
 package com.gabrielsa.models;
 
 import com.gabrielsa.dtos.MacroDTO;
+import com.gabrielsa.dtos.MacroRespostaDTO;
 import com.gabrielsa.enums.ModuloEnum;
 import com.gabrielsa.generics.ModeloGenerico;
 
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import net.bytebuddy.asm.Advice.This;
 
 @Entity
 @Table
@@ -36,8 +38,9 @@ public class Macro extends ModeloGenerico {
 
 	}
 
-	public static Macro macroFromDto(MacroDTO macroDTO, ModuloEnum modulo) {
-		return new Macro(macroDTO.codigoMacro(), macroDTO.descricaoMacro(), modulo);
+	public MacroRespostaDTO toDtoResposta() {
+		return new MacroRespostaDTO(this.getId(), this.getCodigoMacro(), this.getDescricao(),
+				this.getModulo().getNome());
 
 	}
 
