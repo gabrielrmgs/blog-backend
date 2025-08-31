@@ -1,5 +1,8 @@
 package com.gabrielsa.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gabrielsa.dtos.MacroDTO;
 import com.gabrielsa.dtos.MacroRespostaDTO;
 import com.gabrielsa.models.Macro;
@@ -49,6 +52,12 @@ public class MacroService {
 				dtoAtualizar.codigoMacro(), dtoAtualizar.descricaoMacro(), dtoAtualizar.moduloNome());
 		Macro macroAtualizada = macroRepository.findById(dtoAtualizar.id());
 		return macroAtualizada;
+	}
+
+	public List<Macro> buscarMacros() {
+		List<Macro> macros = new ArrayList<>();
+		macros = macroRepository.findAll().list();
+		return macros;
 	}
 
 }

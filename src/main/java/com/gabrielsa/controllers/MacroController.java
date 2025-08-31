@@ -1,5 +1,8 @@
 package com.gabrielsa.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.gabrielsa.dtos.MacroDTO;
 import com.gabrielsa.dtos.MacroRespostaDTO;
 import com.gabrielsa.models.Macro;
@@ -9,6 +12,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -46,6 +50,23 @@ public class MacroController {
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST).entity("Erro ao atualizar macro: " + e.getMessage())
 					.build();
+		}
+	}
+
+	@GET
+	@Path("/allMacros")
+	public Response buscarTodasMacros() {
+		try {
+			List<Macro> macros = macroService.buscarMacros();
+			List<MacroRespostaDTO> macrosRespostaDTOs = new ArrayList<>();
+			if (!macros.isEmpty()) {
+				for (Macro macro : macros) {
+					macrosRespostaDTOs.add(macro.toDtoResposta());
+				}
+			}
+			return Response.status(Status.FOUND).entity(macrosRespostaDTOs).build();
+		} catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).entity("Sem macros encontradas!").build();
 		}
 	}
 
