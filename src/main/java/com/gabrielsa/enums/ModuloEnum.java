@@ -5,7 +5,8 @@ public enum ModuloEnum {
 	RTD("Títulos e Documentos"),
 	IMOVEIS("Registro de Imóveis"),
 	RCPN("Registro Civil de Pessoas Naturais"),
-	RCPJ("Registro Civil de Pessoas Jurídicas");
+	RCPJ("Registro Civil de Pessoas Jurídicas"),
+	EP("Escrituras e Procurações");
 
 	private String nome;
 

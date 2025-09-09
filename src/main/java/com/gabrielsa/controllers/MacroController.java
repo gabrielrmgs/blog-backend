@@ -54,14 +54,18 @@ public class MacroController {
 	}
 
 	@GET
-	@Path("/allMacros")
+	@Path("/macrosAtivas")
 	public Response buscarTodasMacros() {
 		try {
 			List<Macro> macros = macroService.buscarMacros();
 			List<MacroRespostaDTO> macrosRespostaDTOs = new ArrayList<>();
 			if (!macros.isEmpty()) {
 				for (Macro macro : macros) {
-					macrosRespostaDTOs.add(macro.toDtoResposta());
+
+					if (macro.getAtivo()) {
+
+						macrosRespostaDTOs.add(macro.toDtoResposta());
+					}
 				}
 			}
 			return Response.status(Status.FOUND).entity(macrosRespostaDTOs).build();
@@ -70,4 +74,18 @@ public class MacroController {
 		}
 	}
 
+	@POST
+	@Path("/salvarMacros")
+	@Transactional
+	public Response salvarListaMacros(List<MacroDTO> listaMacros) {
+
+		try {
+			macroService.salvarListaMacros(listaMacros);
+			return Response.status(Status.CREATED).entity("Lista de macros salva").build();
+		} catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).entity("Macros não salvas, erro ->" + e.getMessage())
+					.build();
+		}
+
+	}
 }

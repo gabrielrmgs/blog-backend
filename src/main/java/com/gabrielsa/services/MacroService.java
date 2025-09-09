@@ -60,4 +60,12 @@ public class MacroService {
 		return macros;
 	}
 
+	public void salvarListaMacros(List<MacroDTO> macrosDTOs) {
+		if (!macrosDTOs.isEmpty()) {
+			for (MacroDTO dto : macrosDTOs) {
+				salvarMacro(dto);
+			}
+		}
+	}
+
 }
