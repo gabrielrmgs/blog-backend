@@ -7,6 +7,7 @@ import com.gabrielsa.models.Cargo;
 import com.gabrielsa.models.Usuario;
 import com.gabrielsa.repositorys.CargoRepository;
 import com.gabrielsa.repositorys.UsuarioRepository;
+import com.gabrielsa.utils.PasswordHasher;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -19,22 +20,28 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     @Inject
     private CargoRepository cargoRepository;
+    @Inject
+    private PasswordHasher passwordHasher;
 
     @Transactional
     public Usuario salvarUsuario(UsuarioDTO dto) {
 
-        if(dto.nome() == null || dto.nome().trim().isEmpty()) throw new BadRequestException("O nome não pode ser vazio!");
-        if(dto.email() == null || !dto.email().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) throw new BadRequestException("o e-mail não pode ser vazio!");
-        if(dto.senha() == null || dto.senha().trim().isEmpty() || dto.senha().length() <= 6) throw new BadRequestException("A senha precisar ter 6 ou mais caracteres");
-        if(usuarioRepository.buscarPorNome(dto.nome()).isPresent()) throw new BadRequestException("O nome informado já existe!");
-        if(usuarioRepository.buscarPorEmail(dto.email()).isPresent()) throw new BadRequestException("O e-mail já está cadastrado!");
-        
+        if (dto.nome() == null || dto.nome().trim().isEmpty())
+            throw new BadRequestException("O nome não pode ser vazio!");
+        if (dto.email() == null || !dto.email().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"))
+            throw new BadRequestException("o e-mail não pode ser vazio!");
+        if (dto.senha() == null || dto.senha().trim().isEmpty() || dto.senha().length() <= 6)
+            throw new BadRequestException("A senha precisar ter 6 ou mais caracteres");
+        if (usuarioRepository.buscarPorNome(dto.nome()).isPresent())
+            throw new BadRequestException("O nome informado já existe!");
+        if (usuarioRepository.buscarPorEmail(dto.email()).isPresent())
+            throw new BadRequestException("O e-mail já está cadastrado!");
+
         Cargo cargoUsuario = null;
-        if(dto.cargoId() != null) {
+        if (dto.cargoId() != null) {
             cargoUsuario = cargoRepository.findById(dto.cargoId());
         }
-        //faltando encriptar a peste da senha e passar no parametro de instanciacao.
-        Usuario novoUsuario = Usuario.fromDTO(dto, dto.senha(), cargoUsuario);
+        Usuario novoUsuario = Usuario.fromDTO(dto, passwordHasher.hashPassword(dto.senha()), cargoUsuario);
         usuarioRepository.persist(novoUsuario);
         return novoUsuario;
     }
@@ -46,5 +53,5 @@ public class UsuarioService {
     public UsuarioRepository getUsuarioRepository() {
         return this.usuarioRepository;
     }
-    
+
 }
