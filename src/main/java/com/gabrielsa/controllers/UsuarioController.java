@@ -7,6 +7,9 @@ import com.gabrielsa.dtos.UsuarioRespostaDTO;
 import com.gabrielsa.models.Usuario;
 import com.gabrielsa.repositorys.UsuarioRepository;
 import com.gabrielsa.services.UsuarioService;
+
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -35,6 +38,7 @@ public class UsuarioController {
 
     @POST
     @Path("/cadastro")
+    @PermitAll
     @Transactional
     public Response salvarUsuario(UsuarioDTO usuarioDTO) {
 
@@ -54,8 +58,9 @@ public class UsuarioController {
     public Response buscarUsuario(@PathParam("nome") String nome) {
         try {
             Optional<Usuario> usuarioPesquisa = usuarioService.buscarNome(nome);
-            if(!usuarioPesquisa.isPresent()) {
-                return Response.status(Response.Status.NOT_FOUND).entity("Usuário de nome " + nome + " não encontrado!").build();
+            if (!usuarioPesquisa.isPresent()) {
+                return Response.status(Response.Status.NOT_FOUND).entity("Usuário de nome " + nome + " não encontrado!")
+                        .build();
             }
             UsuarioRespostaDTO resposta = UsuarioRespostaDTO.fromEntidade(usuarioPesquisa.get());
             return Response.ok(resposta).build();

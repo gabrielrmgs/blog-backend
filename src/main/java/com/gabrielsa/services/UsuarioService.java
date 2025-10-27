@@ -41,7 +41,7 @@ public class UsuarioService {
         if (dto.cargoId() != null) {
             cargoUsuario = cargoRepository.findById(dto.cargoId());
         }
-        Usuario novoUsuario = Usuario.fromDTO(dto, passwordHasher.hashPassword(dto.senha()), cargoUsuario);
+        Usuario novoUsuario = Usuario.fromDTO(dto, dto.senha(), cargoUsuario);
         usuarioRepository.persist(novoUsuario);
         return novoUsuario;
     }

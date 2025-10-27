@@ -3,6 +3,8 @@ package com.gabrielsa.models;
 import com.gabrielsa.dtos.UsuarioDTO;
 import com.gabrielsa.dtos.UsuarioRespostaDTO;
 import com.gabrielsa.generics.ModeloGenerico;
+
+import io.quarkus.elytron.security.common.BcryptUtil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,9 +30,13 @@ public class Usuario extends ModeloGenerico {
 
     private String nome;
     private String email;
+
     private String senha;
+
     @ManyToOne
     private Cargo cargo;
+
+    private String role;
 
     public Usuario() {
     }
@@ -79,7 +85,7 @@ public class Usuario extends ModeloGenerico {
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.senha = BcryptUtil.bcryptHash(senha);
     }
 
     public Cargo getCargo() {
@@ -89,7 +95,6 @@ public class Usuario extends ModeloGenerico {
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
-
 
     public Usuario id(Long id) {
         setId(id);
@@ -116,16 +121,24 @@ public class Usuario extends ModeloGenerico {
         return this;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public static Usuario fromDTO(UsuarioDTO dto, String senhaEncriptada, Cargo cargoUsuario) {
         return new Usuario()
-        .nome(dto.nome())
-        .email(dto.email())
-        .senha(senhaEncriptada)
-        .cargo(cargoUsuario);
+                .nome(dto.nome())
+                .email(dto.email())
+                .senha(senhaEncriptada)
+                .cargo(cargoUsuario);
     }
 
     public UsuarioRespostaDTO toDTO() {
-        return new UsuarioRespostaDTO(this.id,this.nome, this.email, this.cargo.getId());
+        return new UsuarioRespostaDTO(this.id, this.nome, this.email, this.cargo.getId());
     }
 
     @Override
@@ -136,7 +149,9 @@ public class Usuario extends ModeloGenerico {
             return false;
         }
         Usuario usuario = (Usuario) o;
-        return Objects.equals(id, usuario.id) && Objects.equals(nome, usuario.nome) && Objects.equals(email, usuario.email) && Objects.equals(senha, usuario.senha) && Objects.equals(cargo, usuario.cargo);
+        return Objects.equals(id, usuario.id) && Objects.equals(nome, usuario.nome)
+                && Objects.equals(email, usuario.email) && Objects.equals(senha, usuario.senha)
+                && Objects.equals(cargo, usuario.cargo);
     }
 
     @Override
@@ -147,11 +162,11 @@ public class Usuario extends ModeloGenerico {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", nome='" + getNome() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", senha='" + getSenha() + "'" +
-            ", cargo='" + getCargo() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", nome='" + getNome() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", senha='" + getSenha() + "'" +
+                ", cargo='" + getCargo() + "'" +
+                "}";
     }
 }
